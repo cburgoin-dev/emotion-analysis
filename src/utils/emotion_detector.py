@@ -28,15 +28,23 @@ def detect_emotion_from_frame(frame, backend=DEFAULT_BACKEND):
         result = result[0]
 
     emotion = result['dominant_emotion']
+
+    emotion_scores = result['emotion']
+
     face_area = result['region']
 
     detection_time = time.time() - start_time
 
-    return emotion, face_area, detection_time
+    return (
+        emotion,
+        emotion_scores,
+        face_area,
+        detection_time
+    )
 
-def draw_emotion(frame, emotion, face_area):
+def is_valid_face(face_area, frame_shape):
     """
-    Dibuja la emoción detectada sobre el frame.
+    Valida si el área detectada corresponde a un rostro razonable.
     """
 
     x = face_area['x']
@@ -44,16 +52,31 @@ def draw_emotion(frame, emotion, face_area):
     w = face_area['w']
     h = face_area['h']
 
-    frame_height, frame_width = frame.shape[:2]
+    frame_height, frame_width = frame_shape[:2]
 
     if w <= 0 or h <= 0:
-        return
+        return False
 
     if w > frame_width * 0.9 or h > frame_height * 0.9:
-        return
+        return False
 
     if w < 50 or h < 50:
+        return False
+
+    return True
+
+def draw_emotion(frame, emotion, face_area):
+    """
+    Dibuja la emoción detectada sobre el frame.
+    """
+
+    if not is_valid_face(face_area, frame.shape):
         return
+
+    x = face_area['x']
+    y = face_area['y']
+    w = face_area['w']
+    h = face_area['h']
 
     cv2.rectangle(
         frame,
