@@ -5,6 +5,7 @@ import os
 
 from tkinter import ttk
 from PIL import Image, ImageTk
+from datetime import datetime
 
 sys.path.append(
     os.path.abspath(
@@ -17,6 +18,9 @@ from src.utils.emotion_detector import (
     draw_emotion,
     is_valid_face
 )
+from src.utils.exporter import export_results_to_excel
+
+from src.models.emotion_result import EmotionResult
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 600
@@ -49,6 +53,8 @@ class EmotionApp:
 
         self.cap = None
         self.camera_running = False
+
+        self.session_results = []
 
         # Manejo correcto al cerrar ventana
         self.root.protocol(
@@ -105,6 +111,23 @@ class EmotionApp:
         )
 
         title_label.pack(pady=20)
+
+        user_label = tk.Label(
+            self.info_frame,
+            text="Nombre Usuario",
+            font=STATUS_FONT,
+            fg=TEXT_COLOR,
+            bg=BACKGROUND_COLOR
+        )
+
+        user_label.pack()
+
+        self.user_entry = tk.Entry(
+            self.info_frame,
+            width=25
+        )
+
+        self.user_entry.pack(pady=10)
 
         # Selector backend
         backend_label = tk.Label(
@@ -207,6 +230,18 @@ class EmotionApp:
 
         self.stop_button.pack()
 
+        self.export_button = tk.Button(
+            self.info_frame,
+            text="Exportar Excel",
+            font=BUTTON_FONT,
+            width=20,
+            fg=TEXT_COLOR,
+            bg=BUTTON_COLOR,
+            command=self.export_results
+        )
+
+        self.export_button.pack(pady=20)
+
         self.stop_button.config(state="disabled")
 
     def start_camera(self):
@@ -272,6 +307,26 @@ class EmotionApp:
 
         self.video_label.imgtk = None
 
+    def export_results(self):
+        """
+        Exporta los resultados emocionales a Excel.
+        """
+
+        if not self.session_results:
+
+            self.status_label.config(
+                text="Estado: No hay datos para exportar"
+            )
+
+            return
+        export_results_to_excel(
+            self.session_results
+        )
+
+        self.status_label.config(
+            text="Estado: Datos exportados"
+        )
+
     def update_frame(self):
         """
         Captura y actualiza frames en la interfaz.
@@ -318,6 +373,18 @@ class EmotionApp:
             draw_emotion(frame, emotion, face_area)
 
             confidence = emotion_scores[emotion]
+
+            result = EmotionResult(
+                timestamp=datetime.now(),
+                user_name=self.user_entry.get(),
+                emotion=emotion,
+                confidence=confidence,
+                fps=fps,
+                detection_time=detection_time,
+                backend=backend
+            )
+
+            self.session_results.append(result)
 
             self.emotion_label.config(
                 text=f"Emoción: {emotion}"
