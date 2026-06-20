@@ -41,7 +41,7 @@ The screenshots below showcase the emotion recognition interface operating under
 |---|---|---|
 | ![](screenshots/emotion-analysis-01.png) | ![](screenshots/emotion-analysis-02.png) | ![](screenshots/emotion-analysis-03.png) |
 
-| Surprise | Surprise |
+| Surprise | Alternative Scenario |
 |---|---|
 | ![](screenshots/emotion-analysis-04.png) | ![](screenshots/emotion-analysis-05.png) |
 
