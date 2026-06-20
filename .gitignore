@@ -56,3 +56,12 @@ lib/
 # Project outputs
 # =========================
 output/
+
+# Generated exports
+*.xlsx
+
+# Experimental assets
+assets/
+
+# Screenshots taken during program execution
+screenshots/portfolio/
