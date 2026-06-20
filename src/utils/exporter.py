@@ -11,7 +11,7 @@ def export_results_to_excel(results, file_name="emotion_results.xlsx"):
 
         data.append({
             "Timestamp": result.timestamp,
-            "User": result.user_name,
+            "Identifier": result.identifier,
             "Emotion": result.emotion,
             "Confidence": result.confidence,
             "FPS": result.fps,

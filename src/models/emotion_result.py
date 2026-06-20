@@ -6,7 +6,7 @@ class EmotionResult:
 
     timestamp: datetime
 
-    user_name: str
+    identifier: str
 
     emotion: str
 
