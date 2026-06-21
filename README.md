@@ -10,9 +10,9 @@ Originally developed as part of research activities conducted at UABCS's Artific
 
 ## 🎥 Demo
 
-Watch the application in action:
+[![Emotion Analysis Demo](https://img.youtube.com/vi/rF7Pxkg8UBA/maxresdefault.jpg)](https://youtu.be/rF7Pxkg8UBA)
 
-▶️ https://youtu.be/rF7Pxkg8UBA
+▶️ **[Watch Demo on YouTube](https://youtu.be/rF7Pxkg8UBA)**
 
 The demonstration showcases the desktop interface, real-time emotion detection workflow, detector selection, live metrics, and the overall user experience of the system.
 
