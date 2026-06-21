@@ -8,6 +8,16 @@ Originally developed as part of research activities conducted at UABCS's Artific
 
 ---
 
+## 🎥 Demo
+
+Watch the application in action:
+
+▶️ https://youtu.be/rF7Pxkg8UBA
+
+The demonstration showcases the desktop interface, real-time emotion detection workflow, detector selection, live metrics, and the overall user experience of the system.
+
+---
+
 ## Features
 
 - Real-time emotion recognition
@@ -59,8 +69,8 @@ Rather than focusing exclusively on prediction quality, the project also incorpo
 
 ## Notes
 
-The repository represents an ongoing research-oriented prototype.
+This repository represents an ongoing research-oriented prototype developed within LIDIAIR.
 
 Although the system supports live webcam processing, the screenshots included in this README use controlled evaluation scenarios to provide reproducible examples of the application's interface and outputs.
 
-Additional detectors, evaluation strategies, and reporting capabilities may continue to evolve over future iterations of the project.
+Additional detectors, evaluation strategies, reporting capabilities, and experimental analyses may continue to evolve as part of future iterations of the research project.
